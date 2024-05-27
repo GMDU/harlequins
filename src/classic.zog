@@ -1,0 +1,30 @@
+module classic {
+  fn _tick() {
+    execute as @a[tag=harl.on_classic_island] run function harl:classic/player
+  }
+
+  fn player() {
+    execute if predicate harl:classic/is_sprinting run attribute @s minecraft:generic.movement_speed modifier add harl:no_sprint -0.2 add_multiplied_total
+    execute unless predicate harl:classic/is_sprinting run attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
+  }
+
+  fn enter() {
+    tag @s add harl.on_classic_island
+  }
+
+  fn exit() {
+    tag @s remove harl.on_classic_island
+    attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
+  }
+
+
+  res predicate is_sprinting {
+    condition: "minecraft:entity_properties",
+    entity: "this",
+    predicate: {
+      flags: {
+        is_sprinting: true
+      }
+    }
+  }
+}
