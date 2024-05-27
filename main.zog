@@ -1,0 +1,9 @@
+namespace harl {
+  fn tick() {
+
+  }
+
+  fn load() {
+    tellraw @a "Loaded Harlequins"
+  }
+}
