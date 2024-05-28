@@ -1,9 +1,11 @@
 namespace harl
 
 include "src/classic"
+include "src/modern"
 
 fn tick() {
   classic/_tick()
+  modern/_tick()
 }
 
 fn load() {
