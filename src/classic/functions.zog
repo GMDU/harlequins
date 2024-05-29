@@ -1,16 +1,23 @@
 
 fn _load() {
   scoreboard objectives add harl.classic.raycast dummy
+  scoreboard objectives add harl.classic.cooldown dummy
 }
 
 fn _tick() {
   execute as @a[tag=harl.on_classic_island] run function harl:classic/player
-  execute as @e[type=item,tag=harl.classic.persistent] run data modify entity @s Age set value 0s
+  kill @e[type=minecraft:item,nbt={Item:{components:{"minecraft:custom_data":{harl:{classic:{sand:true}}}}}}]
+  execute as @e[type=marker,tag=harl.classic.sand_provider] at @s run tag @a[tag=!harl.classic.has_sand,distance=..1.5] add harl.classic.has_sand
 }
 
 fn player() {
   execute if predicate harl:classic/is_sprinting run attribute @s minecraft:generic.movement_speed modifier add harl:no_sprint -0.25 add_multiplied_total
   execute unless predicate harl:classic/is_sprinting run attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
+
+  execute if score @s harl.classic.cooldown matches 1.. run scoreboard players remove @s harl.classic.cooldown 1
+
+  execute unless entity @s[tag=harl.classic.has_sand] if items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run tag @s add harl.classic.has_sand
+  execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
 }
 
 fn enter() {
@@ -19,20 +26,27 @@ fn enter() {
 
 fn exit() {
   tag @s remove harl.on_classic_island
+  tag @s remove harl.classic.has_sand
   attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
 }
 
-fn summon_sand() {
-  summon item ~ ~ ~ {Item:{id:"minecraft:sand",count:1,components:{"minecraft:enchantments":{levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},"minecraft:enchantment_glint_override":false,"minecraft:item_name":'{"text":"Sand","color":"white"}',"minecraft:custom_data":{harl:{classic:{place_mode:false, sand: true}}},"minecraft:food":{nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},"minecraft:can_break":{show_in_tooltip:false}}},Tags:["harl.classic.persistent"]}
+fn give_sand() {
+  give @s sand[minecraft:enchantments={levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},minecraft:enchantment_glint_override=false,minecraft:item_name='{"text":"Sand","color":"white"}',minecraft:custom_data={harl:{classic:{place_mode:false, sand: true}}},minecraft:food={nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},minecraft:can_break={show_in_tooltip:false}]
 }
 
 fn switch_sand_mode() {
-  advancement revoke @s only harl:classic/click_sand
   item modify entity @s weapon.mainhand harl:classic/switch_sand_mode
+  schedule function harl:classic/revoke_sand_advancement 4t replace
+}
+
+fn revoke_sand_advancement() {
+  advancement revoke @a[advancements={harl:classic/click_sand=true}] only harl:classic/click_sand
 }
 
 module place_sand {
   fn init() {
+    execute if score @s harl.classic.cooldown matches 1.. run return -1
+    scoreboard players set @s harl.classic.cooldown 4
     scoreboard players set $forward harl.classic.raycast 0
     scoreboard players set $down harl.classic.raycast 0
     execute at @s anchored eyes positioned ^ ^ ^ run function harl:classic/place_sand/raycast
@@ -61,6 +75,8 @@ module place_sand {
 
 module break {
   fn init() {
+    execute if score @s harl.classic.cooldown matches 1.. run return -1
+    scoreboard players set @s harl.classic.cooldown 4
     scoreboard players set $forward harl.classic.raycast 0
     execute at @s anchored eyes positioned ^ ^ ^ run function harl:classic/break/raycast
   }
