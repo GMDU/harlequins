@@ -1,4 +1,3 @@
-
 fn _load() {
   scoreboard objectives add harl.classic.raycast dummy
   scoreboard objectives add harl.classic.cooldown dummy
@@ -22,12 +21,14 @@ fn player() {
 
 fn enter() {
   tag @s add harl.on_classic_island
+  effect give @s resistance infinite 255 true
 }
 
 fn exit() {
   tag @s remove harl.on_classic_island
   tag @s remove harl.classic.has_sand
   attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
+  effect clear @s resistance
 }
 
 fn give_sand() {

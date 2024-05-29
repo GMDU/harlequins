@@ -1,4 +1,3 @@
-
 res predicate is_sprinting {
   condition: "minecraft:entity_properties",
   entity: "this",
