@@ -3,12 +3,12 @@ fn reset() {
 
 }
 
-fn player_enter() {
+fn enter() {
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false
 }
 
-fn player_leave() {
+fn exit() {
   attribute @s minecraft:generic.attack_speed modifier remove harl:instant_attack
   gamerule naturalRegeneration true
 }
