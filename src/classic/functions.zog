@@ -19,6 +19,10 @@ fn player() {
   execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
 }
 
+fn reset() {
+  # TODO: probably blocks need to be reset
+}
+
 fn enter() {
   tag @s add harl.on_classic_island
   effect give @s resistance infinite 255 true

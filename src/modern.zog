@@ -2,4 +2,14 @@ module modern {
   fn _tick() {
     data merge entity @e[type=villager,tag=harl.modern.villager,name=Dinnerbone,limit=1] {VillagerData:{profession:"minecraft:farmer"},Offers:{Recipes:[{rewardExp:0b,maxUses:1,buy:{id:"minecraft:pumpkin_seeds",count:4},sell:{id:"minecraft:glass_bottle",count:1}}]}}
   }
+
+  fn reset() {
+    execute as @e[type=villager,tag=harl.modern.villager,name=Dinnerbone,limit=1] at @s run function harl:modern/replace_villager
+    execute at @e[type=marker,tag=harl.modern.bee_nest,limit=1] run setblock ~ ~ ~ bee_nest[facing=south,honey_level=5]
+  }
+
+  fn replace_villager() {
+    kill @s
+    summon villager ~ ~ ~ {NoAI:1b,Tags:["harl.modern.villager"],Rotation:[90f,0f]}
+  }
 }
