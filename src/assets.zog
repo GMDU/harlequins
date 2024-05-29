@@ -1,0 +1,3 @@
+module title {
+  asset textures/item '../assets/title/*.png'
+}
