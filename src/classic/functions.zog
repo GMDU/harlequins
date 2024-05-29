@@ -55,7 +55,6 @@ module place_sand {
   }
 
   fn hit() {
-    item modify entity @s weapon.mainhand {"function": "minecraft:set_count","count":-1,"add":true}
     setblock ~ ~ ~ sand
   }
 }
@@ -74,7 +73,6 @@ module break {
   }
 
   fn hit() {
-    execute if block ~ ~ ~ sand run function harl:classic/summon_sand
     gamerule doTileDrops false
     setblock ~ ~ ~ air destroy
     gamerule doTileDrops true
