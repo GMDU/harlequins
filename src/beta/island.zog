@@ -1,0 +1,14 @@
+fn reset() {
+  # Island at 1050 50 1050, in harl:void
+
+}
+
+fn player_enter() {
+  attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
+  gamerule naturalRegeneration false
+}
+
+fn player_leave() {
+  attribute @s minecraft:generic.attack_speed modifier remove harl:instant_attack
+  gamerule naturalRegeneration true
+}

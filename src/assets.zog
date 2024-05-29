@@ -1,3 +1,117 @@
+asset models/item flat {
+	"ambientocclusion": false,
+  "gui_light": "front",
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 0],
+			"color": 8,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#layer0"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#layer0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#layer0"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#layer0"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#layer0"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#layer0"}
+			}
+		}
+	],
+	"display": {
+		"fixed": {
+			"translation": [0, 0, 7.5],
+			"scale": [2, 2, 1]
+		}
+	}
+}
+
 module title {
   asset textures/item '../assets/title/*.png'
+
+  asset models/item part1 {
+    parent: "harl:item/flat",
+    textures: {
+      layer0: "harl:item/title/part1"
+    }
+  }
+
+  asset models/item part2 {
+    parent: "harl:item/flat",
+    textures: {
+      layer0: "harl:item/title/part2"
+    }
+  }
+
+  asset models/item part3 {
+    parent: "harl:item/flat",
+    textures: {
+      layer0: "harl:item/title/part3"
+    }
+  }
+
+  asset models/item part4 {
+    parent: "harl:item/flat",
+    textures: {
+      layer0: "harl:item/title/part4"
+    }
+  }
+}
+
+asset textures/block '../assets/blocks/*'
+asset models/block cobblestone_cursed {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/cobblestone_cursed"
+  }
+}
+
+namespace minecraft {
+  asset models/item iron_nugget {
+    parent: "minecraft:item/generated",
+    textures: {
+      'layer0': "minecraft:item/iron_nugget"
+    },
+    overrides: [
+      {
+        predicate: {
+          'custom_model_data': 114000
+        },
+        model: "harl:item/title/part1"
+      },
+      {
+        predicate: {
+          'custom_model_data': 114001
+        },
+        model: "harl:item/title/part2"
+      },
+      {
+        predicate: {
+          'custom_model_data': 114002
+        },
+        model: "harl:item/title/part3"
+      },
+      {
+        predicate: {
+          'custom_model_data': 114003
+        },
+        model: "harl:item/title/part4"
+      }
+    ]
+  }
+
+  asset blockstates oak_slab {
+    "variants": {
+      "type=bottom": {
+        "model": "minecraft:block/oak_slab"
+      },
+      "type=double,waterlogged=false": {
+        "model": "minecraft:block/oak_planks"
+      },
+      "type=top": {
+        "model": "minecraft:block/oak_slab_top"
+      },
+      "type=double,waterlogged=true": {
+        "model": "harl:block/cobblestone_cursed"
+      },
+    }
+  }
 }
