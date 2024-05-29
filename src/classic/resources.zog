@@ -1,0 +1,131 @@
+
+res predicate is_sprinting {
+  condition: "minecraft:entity_properties",
+  entity: "this",
+  predicate: {
+    flags: {
+      is_sprinting: true
+    }
+  }
+}
+
+res enchantment sand_placement {
+  "description": "Classic sand placement",
+  "supported_items": "minecraft:sand",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 0,
+  "slots": [],
+  "effects": {
+    "minecraft:hit_block": [
+      {
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "harl:classic/place_sand/init"
+        },
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": {"harl": {"classic": {"place_mode": true}}}
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "harl:classic/break/init"
+        },
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": {"harl": {"classic": {"place_mode": false}}}
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+res advancement click_sand {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:sand"
+          ],
+          "predicates": {
+            "minecraft:custom_data": {"harl": {"classic": {"sand": true}}}
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "harl:classic/switch_sand_mode"
+  }
+}
+
+res item_modifier switch_sand_mode {[
+  {
+    "function": "minecraft:set_custom_data",
+    "tag": {"harl": {"classic": {"place_mode": false}}},
+    "conditions": [
+      {
+        "condition": "minecraft:entity_properties",
+        "entity": "this",
+        "predicate": {
+          "equipment": {
+            "mainhand": {
+              "predicates": {
+                "minecraft:custom_data": {"harl": {"classic": {"place_mode": true}}}
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "function": "minecraft:set_custom_data",
+    "tag": {"harl": {"classic": {"place_mode": true}}},
+    "conditions": [
+      {
+        "condition": "minecraft:entity_properties",
+        "entity": "this",
+        "predicate": {
+          "equipment": {
+            "mainhand": {
+              "predicates": {
+                "minecraft:custom_data": {"harl": {"classic": {"place_mode": false}}}
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+]}

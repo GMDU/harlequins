@@ -1,9 +1,14 @@
-namespace harl {
-  fn tick() {
+namespace harl
 
-  }
+include "src/classic"
+include "src/modern"
 
-  fn load() {
-    tellraw @a "Loaded Harlequins"
-  }
+fn tick() {
+  classic/_tick()
+  modern/_tick()
+}
+
+fn load() {
+  classic/_load()
+  tellraw @a "Loaded Harlequins"
 }
