@@ -1,7 +1,14 @@
 namespace harl
 
+# Assets and Resources
+include "src/assets"
+include "src/resources"
+
+# Islands
 include "src/classic"
+include "src/beta"
 include "src/modern"
+
 
 fn tick() {
   classic/_tick()
