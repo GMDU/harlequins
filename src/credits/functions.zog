@@ -1,0 +1,6 @@
+fn init() {
+  advancement revoke @s only harl:credits/init
+  advancement revoke @s only harl:credits/init2
+  tp ~ ~1000 ~
+  execute in harl:void run tp 0 1000 0
+}

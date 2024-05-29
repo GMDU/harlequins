@@ -1,0 +1,45 @@
+res advancement init {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "dimension": "minecraft:the_end"
+            }
+          }
+        ],
+        "block": "minecraft:end_portal"
+      }
+    }
+  },
+  "rewards": {
+    "function": "harl:credits/init"
+  }
+}
+
+res advancement init2 {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:location_check",
+            "offsetY": -1,
+            "predicate": {
+              "block": {
+                "blocks": "minecraft:end_portal"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "harl:credits/init"
+  }
+}

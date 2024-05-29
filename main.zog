@@ -4,6 +4,9 @@ namespace harl
 include "src/assets"
 include "src/resources"
 
+# Credits
+include "src/credits"
+
 # Islands
 include "src/classic"
 include "src/beta"
@@ -18,4 +21,13 @@ fn tick() {
 fn load() {
   classic/_load()
   tellraw @a "Loaded Harlequins"
+}
+
+fn setup() {
+  execute in harl:void run function harl:setup_credits
+}
+
+fn setup_credits() {
+  forceload add 0 0
+  place template harl:credits_room 0 0 0
 }
