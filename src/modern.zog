@@ -1,6 +1,53 @@
 module modern {
+  fn _load() {
+    scoreboard objectives add harl.modern.life.is.rubbish dummy
+  }
+
   fn _tick() {
     data merge entity @e[type=villager,tag=harl.modern.villager,name=Dinnerbone,limit=1] {VillagerData:{profession:"minecraft:farmer"},Offers:{Recipes:[{rewardExp:0b,maxUses:1,buy:{id:"minecraft:pumpkin_seeds",count:4},sell:{id:"minecraft:glass_bottle",count:1}}]}}
+
+    execute as @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=60}] run data modify entity @s teleport_duration set value 60
+    execute as @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=59}] at @s run function harl:modern/decay/begin_animation
+    scoreboard players remove @e[type=block_display,tag=harl.modern.decay] harl.modern.life.is.rubbish 1
+    kill @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=0}]
+  }
+
+  module decay {
+    fn init() {
+      iterate()
+    }
+
+    fn iterate() {
+      execute at @e[type=marker,tag=harl.modern.centre] summon block_display run function harl:modern/decay/init_display
+      schedule function harl:modern/decay/iterate 1t replace
+    }
+
+    fn init_display() {
+      data modify entity @s interpolation_duration set value 60
+      tag @s add harl.modern.decay
+      scoreboard players set @s harl.modern.life.is.rubbish 61
+
+      spreadplayers ~ ~ 1 20 true @s
+      execute at @s align xyz run tp @s ~ ~-1 ~
+
+      execute at @s if block ~ ~ ~ bedrock run kill @s
+      execute unless entity @s run return -1
+      
+      execute at @s run loot spawn ~ ~ ~ mine ~ ~ ~ minecraft:netherite_pickaxe[minecraft:enchantments={levels:{"minecraft:silk_touch":1}}]
+      execute at @s run data modify entity @s block_state.Name set from entity @n[type=item,nbt={Age:0s}] Item.id
+      execute at @s run kill @n[type=item,nbt={Age:0s}]
+    }
+    
+    fn begin_animation() {
+      data modify entity @s transformation.scale set value [0f,0f,0f]
+      data modify entity @s start_interpolation set value 0
+      setblock ~ ~ ~ air
+      tp @s ~ ~20 ~
+    }
+  }
+
+  fn exit() {
+    schedule clear harl:modern/decay/iterate
   }
 
   fn reset() {

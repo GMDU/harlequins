@@ -20,6 +20,7 @@ fn tick() {
 
 fn load() {
   classic/_load()
+  modern/_load()
   tellraw @a "Loaded Harlequins"
 }
 
