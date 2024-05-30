@@ -19,8 +19,14 @@ fn tick() {
 }
 
 fn load() {
+  objectives()
+  
   classic/_load()
   tellraw @a "Loaded Harlequins"
+}
+
+fn objectives() {
+  scoreboard objectives add harl.credits dummy
 }
 
 fn setup() {
@@ -28,6 +34,7 @@ fn setup() {
 }
 
 fn setup_credits() {
-  forceload add 0 0
+  forceload add 0 0 47 47
   place template harl:credits_room 0 0 0
+  forceload remove 0 0 47 47
 }
