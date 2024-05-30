@@ -1,6 +1,38 @@
 fn init() {
+  kill @e[tag=harl.credits.entity]
   advancement revoke @s only harl:credits/init
   advancement revoke @s only harl:credits/init2
-  tp ~ ~1000 ~
-  execute in harl:void run tp 0 1000 0
+  tag @s add harl.credits.player
+  tp ~ ~10 ~
+  gamemode spectator @s
+  execute in harl:void run function harl:credits/position_player
+  stopsound @s * minecraft:block.portal.travel
+  stopsound @s master
+
+  scoreboard players reset $time harl.credits
+
+  spawn_entities()
+  loop()
+
+  execute at @s run playsound minecraft:music.credits master @s ~ ~ ~ 1 1
+}
+
+fn spawn_entities() {
+  summon item_display 10 21.5 22 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114000}},brightness:{sky:15,block:15}}
+  summon item_display 10 21.5 23 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114001}},brightness:{sky:15,block:15}}
+  summon item_display 10 21.5 24 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114002}},brightness:{sky:15,block:15}}
+  summon item_display 10 21.5 25 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114003}},brightness:{sky:15,block:15}}
+
+  summon text_display 10 16 23 {teleport_duration:59,alignment:"left",Rotation:[90F,0F],Tags:["harl.credits.entity"],text:'[{"text":"I see the player you mean.\\n\\n","color":"dark_aqua"},[{"selector":"@a[tag=harl.credits.player]","color":"dark_green"},{"text":"?\\n\\n"}],{"text":"Yes. Take care. It has reached a higher level now. It can read our thoughts.\\n\\n","color":"dark_aqua"},{"text":"That doesn\'t matter. It thinks we are part of the game.\\n\\n","color":"dark_green"},{"text":"I like this player. It played well. It did not give up.\\n\\n","color":"dark_aqua"},{"text":"It is reading our thoughts as though they were words on a screen.","color":"dark_green"}]',background:0}
+}
+
+fn loop() {
+  execute unless score $time harl.credits matches 30.. run schedule function harl:credits/loop 59t
+  scoreboard players add $time harl.credits 1
+  execute as @e[tag=harl.credits.entity] at @s run tp ~ ~0.5 ~
+}
+
+fn position_player() {
+  advancement revoke @s only harl:credits/position_player
+  tp @s 5 25 24 -90 0
 }

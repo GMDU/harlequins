@@ -43,3 +43,25 @@ res advancement init2 {
     "function": "harl:credits/init"
   }
 }
+
+res advancement position_player {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "nbt": "{Tags:[\"harl.credits.player\"]}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "harl:credits/position_player"
+  }
+}
