@@ -1,3 +1,5 @@
+res structure '../../assets/structures/classic/*.nbt'
+
 res predicate is_sprinting {
   condition: "minecraft:entity_properties",
   entity: "this",

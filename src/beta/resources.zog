@@ -1,4 +1,4 @@
-  res structure '../assets/structures/beta/*.nbt'
+  res structure '../../assets/structures/beta/*.nbt'
 
   res loot_table pig {
     "type": "minecraft:entity",
