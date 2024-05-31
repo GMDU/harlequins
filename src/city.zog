@@ -1,0 +1,3 @@
+module city {
+  include 'city/*'
+}

@@ -1,0 +1,33 @@
+fn init() {
+  execute in harl:void run function harl:city/init_in_dim
+}
+
+fn init_in_dim() {
+  forceload add 1500 1500 1547 1547
+  function harl:city/place_template {integrity: 1f}
+  tp @s 1523 1 1546 180 0
+  tag @s add harl.city.player
+  forceload remove 1500 1500 1547 1547
+  loop()
+}
+
+fn place_template() {
+  gamerule doTileDrops false
+  fill 1507 1 1547 1547 14 1500 air
+  stopsound @a block
+  /$place template harl:city/cityscape 1500 0 1500 none none $(integrity) 5724715
+  gamerule doTileDrops true
+}
+
+fn loop() {
+  execute if entity @a[tag=harl.city.player] run schedule function harl:city/loop 5t
+  execute store result score $z harl.city run data get entity @a[tag=harl.city.player,limit=1] Pos[2]
+  scoreboard players remove $z harl.city 1504
+  scoreboard players operation $z harl.city *= $100 harl.city
+  scoreboard players operation $z harl.city /= $43 harl.city
+  execute if score $z harl.city = $old_z harl.city run return -1
+
+  scoreboard players operation $old_z harl.city = $z harl.city
+  execute store result storage harl:city loop.integrity float 0.01 run scoreboard players get $z harl.city
+  execute in harl:void run function harl:city/place_template with storage harl:city loop
+}
