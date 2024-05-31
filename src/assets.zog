@@ -115,5 +115,5 @@ namespace minecraft {
     }
   }
 
-  include "minecraft_assets/classic"
+  include "minecraft_assets/*"
 }

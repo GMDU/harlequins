@@ -1,0 +1,8 @@
+asset textures/block '../../assets/blocks/beta/*.png'
+
+asset models/block cobblestone {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/cobblestone"
+  }
+}
