@@ -3,7 +3,7 @@ fn reset() {
 
 }
 
-fn _load() {
+fn init() {
   execute in harl:void run function harl:beta/place_island
 }
 

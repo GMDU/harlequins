@@ -1,5 +1,6 @@
-fn _load() {
+fn inti() {
   scoreboard objectives add harl.modern.life.is.rubbish dummy
+  scoreboard objectives add harl.modern dummy
   execute in harl:void run function harl:modern/place_island
 }
 
@@ -24,6 +25,8 @@ fn enter() {
 }
 
 fn exit() {
+  schedule clear harl:modern/decay/iterate
+
   tag @s remove harl.modern.player
 }
 
@@ -66,10 +69,6 @@ module decay {
     setblock ~ ~ ~ air
     tp @s ~ ~20 ~
   }
-}
-
-fn exit() {
-  schedule clear harl:modern/decay/iterate
 }
 
 fn reset() {

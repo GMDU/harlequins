@@ -1,4 +1,4 @@
-fn _load() {
+fn init() {
   scoreboard objectives add harl.classic.raycast dummy
   scoreboard objectives add harl.classic.cooldown dummy
   execute in harl:void run function harl:classic/place_island
@@ -15,7 +15,7 @@ fn place_island() {
 }
 
 fn _tick() {
-  execute as @a[tag=harl.on_classic_island] run function harl:classic/player
+  execute as @a[tag=harl.classic.player] run function harl:classic/player
   kill @e[type=minecraft:item,nbt={Item:{components:{"minecraft:custom_data":{harl:{classic:{sand:true}}}}}}]
   execute as @e[type=marker,tag=harl.classic.sand_provider] at @s run tag @a[tag=!harl.classic.has_sand,distance=..1.5] add harl.classic.has_sand
 }
@@ -35,12 +35,12 @@ fn reset() {
 }
 
 fn enter() {
-  tag @s add harl.on_classic_island
+  tag @s add harl.classic.player
   effect give @s resistance infinite 255 true
 }
 
 fn exit() {
-  tag @s remove harl.on_classic_island
+  tag @s remove harl.classic.player
   tag @s remove harl.classic.has_sand
   attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
   effect clear @s resistance

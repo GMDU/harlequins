@@ -24,9 +24,7 @@ fn tick() {
 fn load() {
   objectives()
   
-  classic/_load()
-  beta/_load()
-  modern/_load()
+  execute unless data storage harl:main {loaded:true} run function harl:setup
   tellraw @a "Loaded Harlequins"
 }
 
@@ -39,7 +37,11 @@ fn objectives() {
 }
 
 fn setup() {
+  data modify storage harl:main loaded set value true
   execute in harl:void run function harl:setup_credits
+  classic/_load()
+  beta/_load()
+  modern/_load()
 }
 
 fn setup_credits() {
