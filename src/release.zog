@@ -1,0 +1,3 @@
+module release {
+  include 'release/*'
+}

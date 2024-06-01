@@ -13,6 +13,7 @@ include "src/city"
 # Islands
 include "src/classic"
 include "src/beta"
+include "src/release"
 include "src/modern"
 
 
