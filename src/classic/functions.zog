@@ -12,6 +12,20 @@ fn place_island() {
   forceload add -1509 -1480
   place template harl:classic/bridge -1509 14 -1480
   forceload remove -1509 -1480
+  data modify storage harl:main classic set value true
+}
+
+fn remove_island() {
+  forceload add -1500 -1500 -1453 -1453
+  gamerule commandModificationBlockLimit 1000000
+  fill -1453 0 -1453 -1500 14 -1500 air
+  gamerule commandModificationBlockLimit 32768
+  forceload remove -1500 -1500 -1453 -1453
+
+  forceload add -1509 -1480
+  fill -1501 14 -1480 -1509 16 -1476 air
+  forceload remove -1509 -1480
+  data modify storage harl:main classic set value false
 }
 
 fn _tick() {
