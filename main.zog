@@ -25,6 +25,7 @@ fn load() {
   objectives()
   
   classic/_load()
+  beta/_load()
   modern/_load()
   tellraw @a "Loaded Harlequins"
 }

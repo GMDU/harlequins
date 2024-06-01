@@ -1,6 +1,17 @@
 fn _load() {
   scoreboard objectives add harl.classic.raycast dummy
   scoreboard objectives add harl.classic.cooldown dummy
+  execute in harl:void run function harl:classic/place_island
+}
+
+fn place_island() {
+  forceload add -1500 -1500 -1453 -1453
+  place template harl:classic/island -1500 0 -1500
+  forceload remove -1500 -1500 -1453 -1453
+
+  forceload add -1509 -1480
+  place template harl:classic/bridge -1509 14 -1480
+  forceload remove -1509 -1480
 }
 
 fn _tick() {
