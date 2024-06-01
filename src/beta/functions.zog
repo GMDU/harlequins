@@ -11,7 +11,6 @@ fn place_island() {
   forceload add -1557 -1520 -1510 -1473
   place template harl:beta/island -1557 13 -1520
   forceload remove -1557 -1520 -1510 -1473
-  data modify storage harl:main beta set value true
 }
 
 fn remove_island() {
@@ -20,7 +19,6 @@ fn remove_island() {
   fill -1557 12 -1520 -1510 33 -1473 air
   gamerule commandModificationBlockLimit 32768
   forceload remove -1557 -1520 -1510 -1473
-  data modify storage harl:main beta set value false
 }
 
 fn enter() {

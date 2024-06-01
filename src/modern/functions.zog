@@ -8,27 +8,68 @@ fn place_island() {
   forceload add -1475 -1420 -1428 -1373
   place template harl:modern/island -1475 0 -1420
   forceload remove -1475 -1420 -1428 -1373
-  data modify storage harl:main modern set value true
 }
 
-fn remove_island() {
-  schedule clear harl:modern/decay/iterate
-  
-  forceload add -1475 -1420 -1428 -1373
+fn remove_island1() {
   kill @e[type=villager,tag=harl.modern.villager]
   kill @e[type=bee,distance=0..]
+  forceload add -1475 -1420 -1450 -1373
 
   gamerule commandModificationBlockLimit 1000000
   gamerule doTileDrops false
-  fill -1475 0 -1420 -1428 45 -1373 air
+  fill -1475 0 -1420 -1450 32 -1373 air
+  stopsound @a block
+  gamerule doTileDrops true
+  gamerule commandModificationBlockLimit 32768
+
+  forceload remove -1475 -1420 -1450 -1373
+}
+
+fn remove_island2() {
+  forceload add -1449 -1420 -1428 -1373
+
+  gamerule commandModificationBlockLimit 1000000
+  gamerule doTileDrops false
+  fill -1449 0 -1420 -1428 45 -1373 air
   stopsound @a block
   gamerule doTileDrops true
   gamerule commandModificationBlockLimit 32768
 
   place template harl:modern/tunnel -1448 9 -1420
-  forceload remove -1475 -1420 -1428 -1373
+  forceload remove -1449 -1420 -1428 -1373
+}
 
-  data modify storage harl:main modern set value false
+fn exit() {
+  tag @s remove harl.modern.player
+  schedule clear harl:modern/decay/iterate
+
+  remove/classic()
+}
+
+module remove {
+  fn classic() {
+    execute in harl:void run function harl:classic/remove_island
+    schedule function harl:modern/remove/beta 4t
+  }
+
+  fn beta() {
+    execute in harl:void run function harl:beta/remove_island
+    schedule function harl:modern/remove/release 4t
+  }
+
+  fn release() {
+    execute in harl:void run function harl:release/remove_island
+    schedule function harl:modern/remove/modern1 4t
+  }
+
+  fn modern1() {
+    execute in harl:void run function harl:modern/remove_island1
+    schedule function harl:modern/remove/modern2 4t
+  }
+
+  fn modern2() {
+    execute in harl:void run function harl:modern/remove_island2
+  }
 }
 
 fn _tick() {
@@ -39,19 +80,11 @@ fn _tick() {
   scoreboard players remove @e[type=block_display,tag=harl.modern.decay] harl.modern.life.is.rubbish 1
   kill @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=0}]
 
-  execute in harl:void positioned -1432 10 -1402 if entity @a[tag=harl.modern.player,distance=..4] if data storage harl:main {classic:true} run function harl:classic/remove_island
-  execute in harl:void positioned -1431 10 -1404 if entity @a[tag=harl.modern.player,distance=..2] if data storage harl:main {beta:true} run function harl:beta/remove_island
-  execute in harl:void positioned -1431 10 -1409 if entity @a[tag=harl.modern.player,distance=..2] if data storage harl:main {release:true} run function harl:release/remove_island
-  execute in harl:void positioned -1431 10 -1406 if entity @a[tag=harl.modern.player,distance=..2] if data storage harl:main {modern:true} run function harl:modern/remove_island
-  execute in harl:void positioned -1431 10 -1410 as @a[tag=harl.modern.player,distance=..2] run function harl:modern/exit
+  execute in harl:void positioned -1431 10 -1405 as @a[tag=harl.modern.player,distance=..2] run function harl:modern/exit
 }
 
 fn enter() {
   tag @s add harl.modern.player
-}
-
-fn exit() {
-  tag @s remove harl.modern.player
 }
 
 module decay {
