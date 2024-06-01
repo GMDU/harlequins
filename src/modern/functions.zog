@@ -69,10 +69,12 @@ module remove {
 
   fn modern2() {
     execute in harl:void run function harl:modern/remove_island2
+    schedule function harl:city/init 4t
   }
 }
 
 fn _tick() {
+  execute unless entity @a[tag=harl.modern.player] run return -1
   data merge entity @e[type=villager,tag=harl.modern.villager,name=Dinnerbone,limit=1] {VillagerData:{profession:"minecraft:farmer"},Offers:{Recipes:[{rewardExp:0b,maxUses:1,buy:{id:"minecraft:pumpkin_seeds",count:4},sell:{id:"minecraft:glass_bottle",count:1}}]}}
 
   execute as @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=60}] run data modify entity @s teleport_duration set value 60

@@ -27,6 +27,7 @@ fn remove_island() {
 }
 
 fn _tick() {
+  execute unless entity @a[tag=harl.classic.player] run return -1
   execute as @a[tag=harl.classic.player] run function harl:classic/player
   kill @e[type=minecraft:item,nbt={Item:{components:{"minecraft:custom_data":{harl:{classic:{sand:true}}}}}}]
   execute as @e[type=marker,tag=harl.classic.sand_provider] at @s run tag @a[tag=!harl.classic.has_sand,distance=..1.5] add harl.classic.has_sand
