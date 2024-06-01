@@ -19,9 +19,22 @@ fn _tick() {
   kill @e[type=block_display,tag=harl.modern.decay,scores={harl.modern.life.is.rubbish=0}]
 }
 
+fn enter() {
+  tag @s add harl.modern.player
+}
+
+fn exit() {
+  tag @s remove harl.modern.player
+}
+
 module decay {
   fn init() {
+    advancement revoke @s only harl:modern/drink_honey
     iterate()
+  }
+
+  fn stop() {
+    schedule clear harl:modern/decay/iterate
   }
 
   fn iterate() {
@@ -43,6 +56,7 @@ module decay {
     
     execute at @s run loot spawn ~ ~ ~ mine ~ ~ ~ minecraft:netherite_pickaxe[minecraft:enchantments={levels:{"minecraft:silk_touch":1}}]
     execute at @s run data modify entity @s block_state.Name set from entity @n[type=item,nbt={Age:0s}] Item.id
+    data modify entity @s block_state.Properties merge value {type:"double",waterlogged:"true"}
     execute at @s run kill @n[type=item,nbt={Age:0s}]
   }
   
