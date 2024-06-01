@@ -40,9 +40,10 @@ fn objectives() {
 fn setup() {
   data modify storage harl:main loaded set value true
   execute in harl:void run function harl:setup_credits
-  classic/_load()
-  beta/_load()
-  modern/_load()
+  classic/init()
+  beta/init()
+  release/init()
+  modern/init()
 }
 
 fn setup_credits() {

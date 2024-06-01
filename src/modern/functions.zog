@@ -1,14 +1,13 @@
-fn inti() {
+fn init() {
   scoreboard objectives add harl.modern.life.is.rubbish dummy
   scoreboard objectives add harl.modern dummy
   execute in harl:void run function harl:modern/place_island
 }
 
-# TODO: put this in the proper place
 fn place_island() {
-  forceload add -1400 -1400 -1353 -1353
-  place template harl:modern/island -1400 0 -1400
-  forceload remove -1400 -1400 -1353 -1353
+  forceload add -1475 -1420 -1428 -1373
+  place template harl:modern/island -1475 0 -1420
+  forceload remove -1475 -1420 -1428 -1373
 }
 
 fn _tick() {
@@ -41,8 +40,7 @@ module decay {
   }
 
   fn iterate() {
-    # FIXME: Make sure to change this when changing the position
-    execute in harl:void positioned -1376 0 -1376 summon block_display run function harl:modern/decay/init_display
+    execute in harl:void positioned -1451 0 -1396 summon block_display run function harl:modern/decay/init_display
     schedule function harl:modern/decay/iterate 1t replace
   }
 

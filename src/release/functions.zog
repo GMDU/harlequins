@@ -1,0 +1,5 @@
+fn init() {
+  forceload add -1551 -1466 -1504 -1419
+  place template harl:release/island -1551 26 -1466
+  forceload remove -1551 -1466 -1504 -1419
+}
