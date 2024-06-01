@@ -15,8 +15,8 @@ fn player() {
 
   execute if score @s harl.classic.cooldown matches 1.. run scoreboard players remove @s harl.classic.cooldown 1
 
-  execute unless entity @s[tag=harl.classic.has_sand] if items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run tag @s add harl.classic.has_sand
-  execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
+  execute unless entity @s[tag=harl.classic.has_sand] if items entity @s container.* waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}] run tag @s add harl.classic.has_sand
+  execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
 }
 
 fn reset() {
@@ -36,7 +36,7 @@ fn exit() {
 }
 
 fn give_sand() {
-  give @s sand[minecraft:enchantments={levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},minecraft:enchantment_glint_override=false,minecraft:item_name='{"text":"Sand","color":"white"}',minecraft:custom_data={harl:{classic:{place_mode:false, sand: true}}},minecraft:food={nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},minecraft:can_break={show_in_tooltip:false}]
+  give @s waxed_exposed_cut_copper_slab[minecraft:enchantments={levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},minecraft:enchantment_glint_override=false,minecraft:item_name='{"text":"Sand","color":"white"}',minecraft:custom_data={harl:{classic:{place_mode:false, sand: true}}},minecraft:food={nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},minecraft:can_break={show_in_tooltip:false},minecraft:custom_model_data=114004]
 }
 
 fn switch_sand_mode() {
@@ -74,7 +74,7 @@ module place_sand {
   }
 
   fn hit() {
-    setblock ~ ~ ~ sand
+    setblock ~ ~ ~ waxed_exposed_cut_copper_slab[type=double,waterlogged=true]
   }
 }
 
@@ -96,6 +96,7 @@ module break {
   fn hit() {
     gamerule doTileDrops false
     setblock ~ ~ ~ air destroy
+    stopsound @a[distance=..16] block
     gamerule doTileDrops true
   }
 }
