@@ -1,5 +1,6 @@
 fn init() {
   execute in harl:void run function harl:city/init_in_dim
+  schedule function harl:harlequins/init 4t
 }
 
 fn init_in_dim() {

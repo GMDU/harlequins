@@ -9,6 +9,7 @@ include "src/credits"
 
 # City
 include "src/city"
+include "src/harlequins"
 
 # Islands
 include "src/classic"

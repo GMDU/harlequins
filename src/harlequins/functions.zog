@@ -1,0 +1,9 @@
+fn init() {
+  execute in harl:void run function harl:harlequins/init_in_dim
+}
+
+fn init_in_dim() {
+  forceload add -1466 -1516 -1419 -1469
+  place template harl:harlequins/harlequins -1466 9 -1516
+  forceload remove -1466 -1516 -1419 -1469
+}
