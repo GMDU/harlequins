@@ -3,7 +3,7 @@ fn init() {
 }
 
 fn _tick() {
-  execute in harl:void positioned -1551 26 -1466 as @a[dx=48,dy=48,dz=48,tag=!harl.release.player] run function harl:release/enter 
+  execute in harl:void positioned -1551 25 -1466 as @a[dx=48,dy=48,dz=48,tag=!harl.release.player] run function harl:release/enter 
 }
 
 fn enter() {
@@ -19,7 +19,7 @@ fn exit() {
 
 fn place_island() {
   forceload add -1551 -1466 -1504 -1419
-  place template harl:release/island -1551 26 -1466
+  place template harl:release/island -1551 25 -1466
   summon minecraft:item -1522 73 -1436 {Age:-32768,Item:{id:"minecraft:elytra",count:1,components:{"minecraft:custom_model_data":114000}}}
   forceload remove -1551 -1466 -1504 -1419
 }
@@ -27,7 +27,7 @@ fn place_island() {
 fn remove_island() {
   forceload add -1551 -1466 -1504 -1419
   gamerule commandModificationBlockLimit 1000000
-  fill -1551 26 -1466 -1504 73 -1419 air
+  fill -1551 25 -1466 -1504 73 -1419 air
   gamerule commandModificationBlockLimit 32768
   forceload remove -1551 -1466 -1504 -1419
 }

@@ -12,7 +12,7 @@ fn _tick() {
 fn place_island() {
   forceload add -1557 -1520 -1510 -1473
   place template harl:beta/island -1557 12 -1520
-  place template harl:beta/bridge -1552 24 -1472
+  place template harl:beta/bridge -1552 23 -1472
   forceload remove -1557 -1520 -1510 -1473
 }
 
@@ -27,7 +27,7 @@ fn remove_island() {
 fn enter() {
   :classic/exit()
   tag @s add harl.beta.player
-  spawnpoint @s -1531 19 -1489
+  spawnpoint @s -1531 20 -1489
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false
 }
