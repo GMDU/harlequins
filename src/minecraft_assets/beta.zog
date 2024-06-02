@@ -15,7 +15,7 @@ asset blockstates cobblestone_slab {
   }
 }
 
-asset blockstates oak_slab {
+asset blockstates spruce_slab {
   "variants": {
     "type=bottom": {
       "model": "minecraft:block/oak_slab"
