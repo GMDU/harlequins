@@ -22,7 +22,7 @@ fn init() {
   execute in harl:void run function harl:credits/spawn_entities
   loop()
 
-  execute at @s run playsound minecraft:music.credits master @s ~ ~ ~ 1 1
+  execute at @s run playsound harl:music.harl.credits master @s ~ ~ ~ 1 1
 }
 
 fn spawn_entities() {
@@ -35,9 +35,15 @@ fn spawn_entities() {
 }
 
 fn loop() {
-  execute unless score $time harl.credits matches 30.. run schedule function harl:credits/loop 59t
+  execute unless score $time harl.credits matches 26.. run schedule function harl:credits/loop 59t
+  execute if score $time harl.credits matches 26.. as @a[tag=harl.credits.player] run function harl:credits/exit
   scoreboard players add $time harl.credits 1
   execute as @e[tag=harl.credits.entity] at @s run tp ~ ~ ~-0.5
+}
+
+fn exit() {
+  tag @s remove harl.credits.player
+  :classic/enter()
 }
 
 fn position_player() {

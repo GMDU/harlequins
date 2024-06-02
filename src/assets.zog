@@ -56,6 +56,8 @@ module title {
   }
 }
 
+asset sounds "../assets/sounds/*.ogg"
+
 module release {
   asset models/item elytra {
     "parent": "minecraft:item/generated",
