@@ -46,6 +46,7 @@ fn player() {
 
 fn enter() {
   tp @s -1464 50 -1464
+  gamemode adventure
   spawnpoint @s -1464 5 -1464
   tag @s add harl.classic.player
   effect give @s resistance infinite 255 true
