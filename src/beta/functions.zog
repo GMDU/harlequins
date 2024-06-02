@@ -9,6 +9,11 @@ fn _tick() {
   item replace entity 93e84a40-1fdf-4385-8f57-ae48db25060f weapon.mainhand with air
 }
 
+fn dialog() {
+  data modify storage harl:dialog lines set value ['{"text":"","color":"dark_aqua","extra":["Connec",{"text":"ti","obfuscated":true},"on parti",{"text":"al","obfuscated":true},"lly restored."]}','{"text":"Is it working now?","color":"dark_green"}','{"text":"","color":"dark_aqua","extra":["I think th",{"text":"ey","obfuscated":true}," can he",{"text":"ar","obfuscated":true}," us again."]}','{"text":"","color":"dark_aqua","extra":["It never w",{"text":"or","obfuscated":true},"ks when you need it."]}','{"text":"Such is life, full of surprises.","color":"dark_green"}','{"text":"Indeed. Always an unexpected journey.","color":"dark_aqua"}','{"text":"","color":"dark_aqua","extra":[{"selector":"@s"}," has jo", {"text":"ur", "obfuscated": true}, "neyed far indeed"]}','{"text":"","color":"dark_green","extra":["It has been ", {"text":"qui", "obfuscated": true}, "te a ride. So m", {"text":"uc", "obfuscated": true}, "ch time spent to get here."]}','{"text":"Indeed.","color":"dark_aqua"}','{"text":"","color":"dark_green","extra":["So much to do to progress to where they ", {"text":"a", "obfuscated": true}, "re now."]}','{"text":"","color":"dark_aqua","extra":["Have you ever wondered wh",{"text":"eth","obfuscated":true},"er they had free choice, or whether they were guided by fate like a pig with a carrot?"]}']
+  schedule function harl:dialog/speak 1s
+}
+
 fn place_island() {
   forceload add -1557 -1520 -1510 -1473
   place template harl:beta/island -1557 12 -1520
@@ -30,6 +35,7 @@ fn enter() {
   spawnpoint @s -1531 20 -1489
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false
+  dialog()
 }
 
 fn exit() {

@@ -51,6 +51,12 @@ fn enter() {
   tag @s add harl.classic.player
   effect give @s resistance infinite 255 true
   attribute @s minecraft:generic.safe_fall_distance modifier add harl:no_fall_dmg 100 add_value
+  dialog()
+}
+
+fn dialog() {
+  data modify storage harl:dialog lines set value ['{"text":"","color":"dark_aqua","extra":["Int",{"text":"e","obfuscated":true},"erface connection... weak..."]}','{"text":"","color":"dark_green","extra":[["Progres",{"text":"s","obfuscated":true}],{"text":" thr"},{"text":"ou","obfuscated":true},"gh timel",{"text":"i","obfuscated":true},"ne..."]}']
+  schedule function harl:dialog/speak 4s
 }
 
 fn exit() {

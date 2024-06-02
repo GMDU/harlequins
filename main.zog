@@ -4,6 +4,9 @@ namespace harl
 include "src/assets"
 include "src/resources"
 
+# Dialog System
+include "src/dialog"
+
 # Credits
 include "src/credits"
 
