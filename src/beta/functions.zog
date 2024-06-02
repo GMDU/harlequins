@@ -6,9 +6,44 @@ fn reset() {
 fn enter() {
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false
+  loop()
 }
 
 fn exit() {
   attribute @s minecraft:generic.attack_speed modifier remove harl:instant_attack
   gamerule naturalRegeneration true
+  schedule clear harl:beta/loop
+}
+
+fn loop() {
+  schedule function harl:beta/loop 1t
+  execute as 93e84a40-1fdf-4385-8f57-ae48db25060f unless predicate harl:beta/has_passenger on vehicle run function harl:beta/pig/cleanup
+  item replace entity 93e84a40-1fdf-4385-8f57-ae48db25060f weapon.mainhand with air
+}
+
+module pig {
+
+  fn ridden() {
+    # Entity: 93e84a40-1fdf-4385-8f57-ae48db25060f
+    advancement revoke @s only harl:beta/pig_ridden
+    # execute if entity 93e84a40-1fdf-4385-8f57-ae48db25060f run kill 93e84a40-1fdf-4385-8f57-ae48db25060f
+
+    execute on vehicle at @s run function harl:beta/pig/setup
+    
+    ride @s dismount
+    ride @s mount 93e84a40-1fdf-4385-8f57-ae48db25060f
+
+    data modify entity 93e84a40-1fdf-4385-8f57-ae48db25060f wander_target set value [I;54,68,-253]
+  }
+
+  fn setup() {
+    summon minecraft:wandering_trader ~ ~ ~ {Invulnerable:1b,UUID:[I;-1813493184,534725509,-1890079160,-618330609],attributes:[{id:"minecraft:generic.scale",base:0.01d}],active_effects:[{id:"minecraft:invisibility",amplifier:0,duration:-1,show_particles:0b}],Silent:true}
+    ride 93e84a40-1fdf-4385-8f57-ae48db25060f mount @s
+    attribute @s minecraft:generic.movement_speed base set 1
+  }
+
+  fn cleanup() {
+    execute on passengers run kill @s
+    kill @s
+  }
 }
