@@ -56,6 +56,17 @@ module title {
   }
 }
 
+module release {
+  asset models/item elytra {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "harl:item/release/elytra"
+    }
+  }
+
+  asset textures/item '../assets/items/elytra.png'
+}
+
 asset textures/block '../assets/blocks/*'
 asset models/block cobblestone_cursed {
   "parent": "minecraft:block/cube_all",
@@ -94,6 +105,27 @@ namespace minecraft {
           'custom_model_data': 114003
         },
         model: "harl:item/title/part4"
+      }
+    ]
+  }
+
+  asset models/item elytra {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "minecraft:item/elytra"
+    },
+    "overrides": [
+      {
+        "predicate": {
+          "custom_model_data": 114000
+        },
+        "model": "harl:item/release/elytra"
+      },
+      {
+        "predicate": {
+          "broken": 1
+        },
+        "model": "minecraft:item/broken_elytra"
       }
     ]
   }
