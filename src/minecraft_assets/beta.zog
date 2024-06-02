@@ -14,3 +14,156 @@ asset blockstates cobblestone_slab {
     },
   }
 }
+
+asset blockstates oak_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/oak_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/oak_planks"
+    },
+    "type=top": {
+      "model": "minecraft:block/oak_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/oak_log"
+    },
+  }
+}
+
+asset blockstates birch_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/birch_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/birch_planks"
+    },
+    "type=top": {
+      "model": "minecraft:block/birch_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/birch_log"
+    },
+  }
+}
+
+asset blockstates mossy_cobblestone_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/mossy_cobblestone_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/mossy_cobblestone"
+    },
+    "type=top": {
+      "model": "minecraft:block/mossy_cobblestone_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/mossy_cobblestone"
+    },
+  }
+}
+
+asset blockstates sandstone_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/sandstone_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/sandstone"
+    },
+    "type=top": {
+      "model": "minecraft:block/sandstone_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/sand"
+    },
+  }
+}
+
+asset blockstates tuff_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/tuff_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/tuff"
+    },
+    "type=top": {
+      "model": "minecraft:block/tuff_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/gravel"
+    },
+  }
+}
+
+asset blockstates polished_tuff_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/polished_tuff_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/polished_tuff"
+    },
+    "type=top": {
+      "model": "minecraft:block/polished_tuff_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/grass_block"
+    },
+  }
+}
+
+asset blockstates tuff_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/tuff_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/tuff"
+    },
+    "type=top": {
+      "model": "minecraft:block/tuff_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/gravel"
+    },
+  }
+}
+
+asset blockstates prismarine_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/prismarine_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/prismarine"
+    },
+    "type=top": {
+      "model": "minecraft:block/prismarine_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/oak_leaves"
+    },
+  }
+}
+
+asset blockstates prismarine_brick_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/prismarine_brick_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/prismarine_bricks"
+    },
+    "type=top": {
+      "model": "minecraft:block/prismarine_brick_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/beta/birch_leaves"
+    },
+  }
+}

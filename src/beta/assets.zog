@@ -6,3 +6,78 @@ asset models/block cobblestone {
     "all": "harl:block/beta/cobblestone"
   }
 }
+
+asset models/block mossy_cobblestone {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/mossy_cobblestone"
+  }
+}
+
+asset models/block oak_log {
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "harl:block/beta/oak_log_top",
+    "side": "harl:block/beta/oak_log"
+  }
+}
+
+asset models/block oak_leaves {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/oak_leaves"
+  }
+}
+
+asset models/block birch_log {
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "harl:block/beta/birch_log_top",
+    "side": "harl:block/beta/birch_log"
+  }
+}
+
+asset models/block birch_leaves {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/birch_leaves"
+  }
+}
+
+asset models/block sand {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/sand"
+  }
+}
+
+asset models/block gravel {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/beta/gravel"
+  }
+}
+
+asset models/block grass_block {
+  "parent": "block/block",
+  "textures": {
+    "particle": "harl:block/classic/dirt",
+    "bottom": "harl:block/classic/dirt",
+    "top": "harl:block/beta/grass_block_top",
+    "side": "harl:block/beta/grass_block_side"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top",    "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "east" }
+      }
+    }
+  ]
+}
