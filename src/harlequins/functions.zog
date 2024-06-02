@@ -7,3 +7,23 @@ fn init_in_dim() {
   place template harl:harlequins/harlequins -1466 9 -1516
   forceload remove -1466 -1516 -1419 -1469
 }
+
+fn _tick() {
+  execute in harl:void positioned -1466 9 -1516 as @a[dx=48,dy=48,dz=48,tag=!harl.harlequins.player] run function harl:harlequins/enter
+}
+
+fn enter() {
+  tag @s add harl.harlequins.player
+  dialog()
+  schedule function harl:city/exit 158s
+}
+
+fn exit() {
+  execute as @a[tag=harl.harlequins.player] run function harl:city/exit
+}
+
+fn dialog() {
+  data modify storage harl:dialog lines set value ['[{"color": "dark_green", "text": "It appears that "}, {"selector": "@s"}, {"text": " has found our physical forms. But they found much more on theire journey here."}]','[{"color": "dark_aqua", "text": "But what did they find?"}]','[{"color": "dark_green", "text": "Something beautiful and a little sad - something that reminded them of memories they made along the way."}]','[{"color": "dark_aqua", "text": "But why are memories beautiful? "}]','[{"color": "dark_green", "text": "Because when you reminisce you think of the good parts first."}]','[{"color": "dark_aqua", "text": "Then why is it sad?"}]','[{"color": "dark_green", "text": "Because even memories fade."}]','[{"color": "dark_aqua", "text": "Then what is their meaning?"}]','[{"color": "dark_green", "text": "Who knows. Perhaps it it something something grand and abstract? Or maybe it is like a boiled egg."}]','[{"color": "dark_aqua", "text": "Why a boiled egg?"}]','[{"color": "dark_green", "text": "Because there is no meaning in the comparison. Perhaps to them this is just a game, a passing dream?"}]','[{"color": "dark_aqua", "text": "But wouldn\'t "}, {"selector": "@s"}, {"text": " try and find some meaning, even if there isn\'t any?"}]','[{"color": "dark_green", "text": "Perhaps, and maybe that has meaning in itself."}]','[{"color": "dark_aqua", "text": "What meaning do you think "}, {"selector": "@s"}, {"text": " found?"}]','[{"color": "dark_green", "text": "Who knows? "}]','[{"color": "dark_aqua", "text": "Shall we ask them?"}]','[{"color": "dark_green", "text": "Perhaps another time. Perhaps we will meet them in another dream and we will speak again."}]','[{"color": "dark_aqua", "text": "Then what now?"}]','[{"color": "dark_green", "text": "Now they must leave to live and dream again, to face new challenges and rise to new heights, to fly and falter and dig deep within themselves. Perhaps when we meet again it will be in a different place, as different people with new memories."}]','[{"color": "dark_aqua", "text": "Then is this the end?"}]','[{"color": "dark_green", "text": "For now."}]','[{"color": "dark_aqua", "text": ""}, {"selector": "@s"}, {"text": "?"}]','[{"color": "dark_green", "text": "Wake Up"}]']
+
+  schedule function harl:dialog/speak 4s
+}

@@ -27,6 +27,7 @@ fn tick() {
   release/_tick()
   modern/_tick()
   city/_tick()
+  harlequins/_tick()
 }
 
 fn load() {

@@ -2,6 +2,6 @@ module dialog {
   fn speak() {
     execute as @a run tellraw @s {"storage": "harl:dialog", "nbt": "lines[0]", "interpret": true}
     data remove storage harl:dialog lines[0]
-    execute if data storage harl:dialog lines[] run schedule function harl:dialog/speak 1s
+    execute if data storage harl:dialog lines[] run schedule function harl:dialog/speak 7s
   }
 }

@@ -48,7 +48,13 @@ fn exit() {
   schedule clear harl:modern/decay/iterate
   kill @e[type=block_display,tag=harl.modern.decay]
 
+  tunnel_dialog()
   remove/classic()
+}
+
+fn tunnel_dialog() {
+  data modify storage harl:dialog lines set value ['[{"color":"dark_aqua", "text":"And did "}, {"selector":"@s"}, {"text":" find it?"}]','[{"color":"dark_green", "text":"I\'m not sure."}]','[{"color":"dark_aqua", "text":"Why? Are they still searching?"}]','[{"color":"dark_green", "text":"I think "}, {"selector":"@s"}, {"text":" will always be searching, but I think they found something. When the whole world flew up in a mess around them they found something unexpected - close to the heart."}]','[{"color":"dark_aqua", "text":"And what did they find?"}]','[{"color":"dark_green", "text":"Something strange. I\'m not sure."}]','[{"color":"dark_aqua", "text":"Why not?"}]','[{"color":"dark_green", "text":"Not sure. Maybe they haven\'t found it yet, or maybe they\'re still discovering it."}]','[{"color":"dark_aqua", "text":"I\'m not sure I understand."}]','[{"color":"dark_green", "text":"That\'s ok. I think "}, {"selector":"@s"}, {"text":" is still discovering it themselves."}]','[{"color":"dark_aqua", "text":"Indeed. It appears they have reached the city at the end of time."}]']
+  schedule function harl:dialog/speak 4s
 }
 
 module remove {
