@@ -1,0 +1,17 @@
+fn init() {
+  execute in harl:void run function harl:release/place_island
+}
+
+fn place_island() {
+  forceload add -1551 -1466 -1504 -1419
+  place template harl:release/island -1551 26 -1466
+  forceload remove -1551 -1466 -1504 -1419
+}
+
+fn remove_island() {
+  forceload add -1551 -1466 -1504 -1419
+  gamerule commandModificationBlockLimit 1000000
+  fill -1551 26 -1466 -1504 73 -1419 air
+  gamerule commandModificationBlockLimit 32768
+  forceload remove -1551 -1466 -1504 -1419
+}

@@ -3,6 +3,24 @@ fn reset() {
 
 }
 
+fn init() {
+  execute in harl:void run function harl:beta/place_island
+}
+
+fn place_island() {
+  forceload add -1557 -1520 -1510 -1473
+  place template harl:beta/island -1557 13 -1520
+  forceload remove -1557 -1520 -1510 -1473
+}
+
+fn remove_island() {
+  forceload add -1557 -1520 -1510 -1473
+  gamerule commandModificationBlockLimit 1000000
+  fill -1557 12 -1520 -1510 33 -1473 air
+  gamerule commandModificationBlockLimit 32768
+  forceload remove -1557 -1520 -1510 -1473
+}
+
 fn enter() {
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false

@@ -20,13 +20,13 @@ include "src/modern"
 fn tick() {
   classic/_tick()
   modern/_tick()
+  city/_tick()
 }
 
 fn load() {
   objectives()
   
-  classic/_load()
-  modern/_load()
+  execute unless data storage harl:main {loaded:true} run function harl:setup
   tellraw @a "Loaded Harlequins"
 }
 
@@ -36,10 +36,16 @@ fn objectives() {
 
   scoreboard players set $100 harl.city 100
   scoreboard players set $43 harl.city 43
+  scoreboard players set $-1 harl.city -1
 }
 
 fn setup() {
+  data modify storage harl:main loaded set value true
   execute in harl:void run function harl:setup_credits
+  classic/init()
+  beta/init()
+  release/init()
+  modern/init()
 }
 
 fn setup_credits() {

@@ -1,10 +1,34 @@
-fn _load() {
+fn init() {
   scoreboard objectives add harl.classic.raycast dummy
   scoreboard objectives add harl.classic.cooldown dummy
+  execute in harl:void run function harl:classic/place_island
+}
+
+fn place_island() {
+  forceload add -1500 -1500 -1453 -1453
+  place template harl:classic/island -1500 0 -1500
+  forceload remove -1500 -1500 -1453 -1453
+
+  forceload add -1509 -1480
+  place template harl:classic/bridge -1509 14 -1480
+  forceload remove -1509 -1480
+}
+
+fn remove_island() {
+  forceload add -1500 -1500 -1453 -1453
+  gamerule commandModificationBlockLimit 1000000
+  fill -1453 0 -1453 -1500 14 -1500 air
+  gamerule commandModificationBlockLimit 32768
+  forceload remove -1500 -1500 -1453 -1453
+
+  forceload add -1509 -1480
+  fill -1501 14 -1480 -1509 16 -1476 air
+  forceload remove -1509 -1480
 }
 
 fn _tick() {
-  execute as @a[tag=harl.on_classic_island] run function harl:classic/player
+  execute unless entity @a[tag=harl.classic.player] run return -1
+  execute as @a[tag=harl.classic.player] run function harl:classic/player
   kill @e[type=minecraft:item,nbt={Item:{components:{"minecraft:custom_data":{harl:{classic:{sand:true}}}}}}]
   execute as @e[type=marker,tag=harl.classic.sand_provider] at @s run tag @a[tag=!harl.classic.has_sand,distance=..1.5] add harl.classic.has_sand
 }
@@ -15,8 +39,8 @@ fn player() {
 
   execute if score @s harl.classic.cooldown matches 1.. run scoreboard players remove @s harl.classic.cooldown 1
 
-  execute unless entity @s[tag=harl.classic.has_sand] if items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run tag @s add harl.classic.has_sand
-  execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* sand[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
+  execute unless entity @s[tag=harl.classic.has_sand] if items entity @s container.* waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}] run tag @s add harl.classic.has_sand
+  execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
 }
 
 fn reset() {
@@ -24,19 +48,19 @@ fn reset() {
 }
 
 fn enter() {
-  tag @s add harl.on_classic_island
+  tag @s add harl.classic.player
   effect give @s resistance infinite 255 true
 }
 
 fn exit() {
-  tag @s remove harl.on_classic_island
+  tag @s remove harl.classic.player
   tag @s remove harl.classic.has_sand
   attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
   effect clear @s resistance
 }
 
 fn give_sand() {
-  give @s sand[minecraft:enchantments={levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},minecraft:enchantment_glint_override=false,minecraft:item_name='{"text":"Sand","color":"white"}',minecraft:custom_data={harl:{classic:{place_mode:false, sand: true}}},minecraft:food={nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},minecraft:can_break={show_in_tooltip:false}]
+  give @s waxed_exposed_cut_copper_slab[minecraft:enchantments={levels:{"harl:classic/sand_placement":1},show_in_tooltip:false},minecraft:enchantment_glint_override=false,minecraft:item_name='{"text":"Sand","color":"white"}',minecraft:custom_data={harl:{classic:{place_mode:false, sand: true}}},minecraft:food={nutrition:0, saturation:0, can_always_eat:true, eat_seconds:999999999},minecraft:can_break={show_in_tooltip:false},minecraft:custom_model_data=114004]
 }
 
 fn switch_sand_mode() {
@@ -74,7 +98,7 @@ module place_sand {
   }
 
   fn hit() {
-    setblock ~ ~ ~ sand
+    setblock ~ ~ ~ waxed_exposed_cut_copper_slab[type=double,waterlogged=true]
   }
 }
 
@@ -96,6 +120,7 @@ module break {
   fn hit() {
     gamerule doTileDrops false
     setblock ~ ~ ~ air destroy
+    stopsound @a[distance=..16] block
     gamerule doTileDrops true
   }
 }
