@@ -12,8 +12,8 @@ fn init() {
   tag @s add harl.credits.player
   tp ~ ~10 ~
   gamemode spectator @s
-  execute in harl:void run tp @s 23 42 23 0 -90
   execute in harl:void run summon minecraft:armor_stand 23 42 23 {Tags:["harl.credits.position"],Marker:1b,Invisible:1b,Rotation:[0f,-90f]}
+  execute in harl:void run function harl:credits/position_player
   stopsound @s * minecraft:block.portal.travel
   stopsound @s master
 
@@ -35,8 +35,8 @@ fn spawn_entities() {
 }
 
 fn loop() {
-  execute unless score $time harl.credits matches 26.. run schedule function harl:credits/loop 59t
-  execute if score $time harl.credits matches 26.. as @a[tag=harl.credits.player] run function harl:credits/exit
+  execute unless score $time harl.credits matches 30.. run schedule function harl:credits/loop 59t
+  execute if score $time harl.credits matches 30.. as @a[tag=harl.credits.player] at @s run function harl:credits/exit
   scoreboard players add $time harl.credits 1
   execute as @e[tag=harl.credits.entity] at @s run tp ~ ~ ~-0.5
 }
@@ -49,5 +49,5 @@ fn exit() {
 fn position_player() {
   advancement revoke @s only harl:credits/position_player
   effect give @s night_vision 1 255 true
-  spectate @n[type=armor_stand,tag=harl.credits.position] @s
+  tp @s 23 42 23 0 -90
 }

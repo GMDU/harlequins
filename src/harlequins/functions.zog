@@ -9,7 +9,7 @@ fn init_in_dim() {
 }
 
 fn _tick() {
-  execute in harl:void positioned -1466 9 -1516 as @a[dx=48,dy=48,dz=48,tag=!harl.harlequins.player] run function harl:harlequins/enter
+  execute in harl:void positioned -1466 9 -1516 as @a[dx=48,dy=48,dz=48,tag=!harl.harlequins.player,tag=harl.city.player] run function harl:harlequins/enter
 }
 
 fn enter() {
