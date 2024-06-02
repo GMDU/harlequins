@@ -6,10 +6,16 @@ fn _tick() {
   execute in harl:void positioned -1551 25 -1466 as @a[dx=48,dy=48,dz=48,tag=!harl.release.player] run function harl:release/enter 
 }
 
+fn dialog() {
+  data modify storage harl:dialog lines set value ['{"text":"","color":"dark_green","extra":["Free will. Such a strange thought. I wondered if ", {"selector":"@s"}," has ever wondered whether they had free will to progress, or whether every act",{"text":"io","obfuscated": true}, "n - both trial and error was predetermined."]}','{"text":"","color":"dark_aqua","extra":["Indeed. How strange. Perhaps they never considered that life with all of its ups and downs could not be scripted."]}','{"text":"","color":"dark_green","extra":["Do you think ", {"selector":"@s"}, " struggled?"]}','{"text":"","color":"dark_aqua","extra":["I think they did. But, those hard times, those se", {"text":"emi","obfuscated":true}, "ngly endless steps, brought them up to greater heights and gave them wing."]}']
+  schedule function harl:dialog/speak 1s
+}
+
 fn enter() {
   :beta/exit()
   tag @s add harl.release.player
   spawnpoint @s -1517 27 -1461
+  dialog()
 }
 
 fn exit() {
