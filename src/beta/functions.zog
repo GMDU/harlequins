@@ -1,15 +1,14 @@
-fn reset() {
-  # Island at 1050 50 1050, in harl:void
-
-}
-
 fn init() {
   execute in harl:void run function harl:beta/place_island
 }
 
+fn _tick() {
+  execute in harl:void positioned -1557 12 -1520 as @a[dx=48,dy=48,dz=48,tag=!harl.beta.player] run function harl:beta/enter 
+}
+
 fn place_island() {
   forceload add -1557 -1520 -1510 -1473
-  place template harl:beta/island -1557 13 -1520
+  place template harl:beta/island -1557 12 -1520
   forceload remove -1557 -1520 -1510 -1473
 }
 
@@ -22,11 +21,17 @@ fn remove_island() {
 }
 
 fn enter() {
+  :classic/exit()
+  tag @s add harl.beta.player
+  spawnpoint @s -1531 19 -1489
   attribute @s minecraft:generic.attack_speed modifier add harl:instant_attack 400 add_value
   gamerule naturalRegeneration false
 }
 
 fn exit() {
+  tag @s remove harl.beta.player
   attribute @s minecraft:generic.attack_speed modifier remove harl:instant_attack
   gamerule naturalRegeneration true
+  clear @s saddle
+  clear @s porkchop
 }

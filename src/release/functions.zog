@@ -2,6 +2,21 @@ fn init() {
   execute in harl:void run function harl:release/place_island
 }
 
+fn _tick() {
+  execute in harl:void positioned -1551 26 -1466 as @a[dx=48,dy=48,dz=48,tag=!harl.release.player] run function harl:release/enter 
+}
+
+fn enter() {
+  :beta/exit()
+  tag @s add harl.release.player
+  spawnpoint @s -1517 27 -1461
+}
+
+fn exit() {
+  tag @s remove harl.release.player
+  clear @s elytra
+}
+
 fn place_island() {
   forceload add -1551 -1466 -1504 -1419
   place template harl:release/island -1551 26 -1466

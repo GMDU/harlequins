@@ -20,6 +20,8 @@ include "src/modern"
 
 fn tick() {
   classic/_tick()
+  beta/_tick()
+  release/_tick()
   modern/_tick()
   city/_tick()
 }

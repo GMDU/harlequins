@@ -19,6 +19,7 @@ fn remove_island() {
   gamerule commandModificationBlockLimit 1000000
   fill -1453 0 -1453 -1500 14 -1500 air
   gamerule commandModificationBlockLimit 32768
+  kill @e[type=marker,tag=harl.classic.sand_provider,distance=0..]
   forceload remove -1500 -1500 -1453 -1453
 
   forceload add -1509 -1480
@@ -43,20 +44,21 @@ fn player() {
   execute if entity @s[tag=harl.classic.has_sand] unless items entity @s container.* waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}] run function harl:classic/give_sand
 }
 
-fn reset() {
-  # TODO: probably blocks need to be reset
-}
-
 fn enter() {
+  tp @s -1464 50 -1464
+  spawnpoint @s -1464 5 -1464
   tag @s add harl.classic.player
   effect give @s resistance infinite 255 true
+  attribute @s minecraft:generic.safe_fall_distance modifier add harl:no_fall_dmg 100 add_value
 }
 
 fn exit() {
   tag @s remove harl.classic.player
   tag @s remove harl.classic.has_sand
   attribute @s minecraft:generic.movement_speed modifier remove harl:no_sprint
+  attribute @s minecraft:generic.safe_fall_distance modifier remove harl:no_fall_dmg
   effect clear @s resistance
+  clear @s waxed_exposed_cut_copper_slab[minecraft:custom_data~{harl:{classic:{sand:true}}}]
 }
 
 fn give_sand() {

@@ -76,7 +76,7 @@ res advancement click_sand {
       "conditions": {
         "item": {
           "items": [
-            "minecraft:sand"
+            "minecraft:waxed_exposed_cut_copper_slab"
           ],
           "predicates": {
             "minecraft:custom_data": {"harl": {"classic": {"sand": true}}}

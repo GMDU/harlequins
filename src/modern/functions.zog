@@ -80,6 +80,8 @@ module remove {
 }
 
 fn _tick() {
+  execute in harl:void positioned -1475 0 -1420 as @a[tag=!harl.modern.player,dx=48,dy=48,dz=48,nbt={OnGround:1b}] run function harl:modern/enter
+
   execute unless entity @a[tag=harl.modern.player] run return -1
   data merge entity @e[type=villager,tag=harl.modern.villager,name=Dinnerbone,limit=1] {VillagerData:{profession:"minecraft:farmer"},Offers:{Recipes:[{rewardExp:0b,maxUses:1,buy:{id:"minecraft:pumpkin_seeds",count:4},sell:{id:"minecraft:glass_bottle",count:1}}]}}
 
@@ -92,7 +94,9 @@ fn _tick() {
 }
 
 fn enter() {
+  :release/exit()
   tag @s add harl.modern.player
+  spawnpoint @s -1445 29 -1403
 }
 
 module decay {
