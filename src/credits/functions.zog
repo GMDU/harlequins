@@ -1,5 +1,7 @@
 fn init() {
   execute if entity @s[tag=harl.credits.seen] run return -1
+  gamerule doDaylightCycle false
+  time set day
   kill @e[tag=harl.credits.entity]
   kill @e[tag=harl.credits.position]
   tag @s add harl.credits.seen

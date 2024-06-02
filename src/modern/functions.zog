@@ -49,6 +49,7 @@ fn exit() {
   kill @e[type=block_display,tag=harl.modern.decay]
 
   tunnel_dialog()
+  time set midnight
   remove/classic()
 }
 

@@ -19,6 +19,7 @@ fn enter() {
 }
 
 fn exit() {
+  gamerule doDaylightCycle true
   execute as @a[tag=harl.harlequins.player] run function harl:city/exit
 }
 
