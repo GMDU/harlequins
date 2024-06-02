@@ -1,6 +1,8 @@
 # Harlequins
 **Harlequins is a datapack made in a week for the [Imageination Jam](https://www.planetminecraft.com/jam/imageination/).**  
 
+**This datapack only works in snapshot 14w21a or higher.**
+
 The theme for this jam, instead of a traditional text prompt, was an image. Specifically *Two Harlequins* by Salvador Dali:
 ![Two harlequins](https://www.salvador-dali.org/media/upload/cataleg_pintura/MITJA/0551.jpg)
 
