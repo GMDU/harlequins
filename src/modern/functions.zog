@@ -11,7 +11,7 @@ fn place_island() {
 }
 
 fn remove_island1() {
-  kill @e[type=villager,tag=harl.modern.villager]
+  kill @e[type=villager,tag=harl.modern.villager,distance=0..]
   kill @e[type=bee,distance=0..]
   forceload add -1475 -1420 -1450 -1373
 
@@ -42,6 +42,7 @@ fn remove_island2() {
 fn exit() {
   tag @s remove harl.modern.player
   schedule clear harl:modern/decay/iterate
+  kill @e[type=block_display,tag=harl.modern.decay]
 
   remove/classic()
 }
