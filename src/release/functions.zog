@@ -20,6 +20,7 @@ fn exit() {
 fn place_island() {
   forceload add -1551 -1466 -1504 -1419
   place template harl:release/island -1551 26 -1466
+  summon minecraft:item -1522 73 -1436 {Age:-32768,Item:{id:"minecraft:elytra",count:1,components:{"minecraft:custom_model_data":114000}}}
   forceload remove -1551 -1466 -1504 -1419
 }
 

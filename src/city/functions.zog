@@ -23,6 +23,10 @@ fn place_template() {
   gamerule doTileDrops true
 }
 
+fn remove_island() {
+  execute in harl:void run fill -1419 9 -1468 -1466 21 -1421 air
+}
+
 fn loop() {
   execute if entity @a[tag=harl.city.player] run schedule function harl:city/loop 5t
   execute store result score $z harl.city run data get entity @a[tag=harl.city.player,limit=1] Pos[2]

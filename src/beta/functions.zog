@@ -3,19 +3,23 @@ fn init() {
 }
 
 fn _tick() {
-  execute in harl:void positioned -1557 12 -1520 as @a[dx=48,dy=48,dz=48,tag=!harl.beta.player] run function harl:beta/enter 
+  execute in harl:void positioned -1557 12 -1520 as @a[dx=48,dy=48,dz=48,tag=!harl.beta.player] run function harl:beta/enter
+  execute unless entity @a[tag=harl.beta.player]
+  execute as 93e84a40-1fdf-4385-8f57-ae48db25060f unless predicate harl:beta/has_passenger on vehicle run function harl:beta/pig/cleanup
+  item replace entity 93e84a40-1fdf-4385-8f57-ae48db25060f weapon.mainhand with air
 }
 
 fn place_island() {
   forceload add -1557 -1520 -1510 -1473
   place template harl:beta/island -1557 12 -1520
+  place template harl:beta/bridge -1552 24 -1472
   forceload remove -1557 -1520 -1510 -1473
 }
 
 fn remove_island() {
   forceload add -1557 -1520 -1510 -1473
   gamerule commandModificationBlockLimit 1000000
-  fill -1557 12 -1520 -1510 33 -1473 air
+  fill -1557 12 -1520 -1510 34 -1467 air
   gamerule commandModificationBlockLimit 32768
   forceload remove -1557 -1520 -1510 -1473
 }
@@ -34,4 +38,30 @@ fn exit() {
   gamerule naturalRegeneration true
   clear @s saddle
   clear @s porkchop
+  schedule clear harl:beta/loop
+}
+
+module pig {
+  fn ridden() {
+    # Entity: 93e84a40-1fdf-4385-8f57-ae48db25060f
+    advancement revoke @s only harl:beta/pig_ridden
+
+    execute on vehicle at @s run function harl:beta/pig/setup
+    
+    ride @s dismount
+    ride @s mount 93e84a40-1fdf-4385-8f57-ae48db25060f
+
+    data modify entity 93e84a40-1fdf-4385-8f57-ae48db25060f wander_target set value [I;-1551, 25, -1469]
+  }
+
+  fn setup() {
+    summon minecraft:wandering_trader ~ ~ ~ {Invulnerable:1b,UUID:[I;-1813493184,534725509,-1890079160,-618330609],attributes:[{id:"minecraft:generic.scale",base:0.01d}],active_effects:[{id:"minecraft:invisibility",amplifier:0,duration:-1,show_particles:0b}],Silent:true}
+    ride 93e84a40-1fdf-4385-8f57-ae48db25060f mount @s
+    attribute @s minecraft:generic.movement_speed base set 1
+  }
+
+  fn cleanup() {
+    execute on passengers run kill @s
+    kill @s
+  }
 }
