@@ -10,9 +10,42 @@ fn init_in_dim() {
 }
 
 fn _tick() {
-  execute if entity @a[tag=harl.city.player] run return -1
-  execute in harl:void positioned -1442 10 -1424 run tag @a[distance=..3] add harl.city.player
-  execute if entity @a[tag=harl.city.player] run function harl:city/loop
+  execute in harl:void positioned -1442 10 -1424 as @a[distance=..3,tag=harl.modern.player,tag=!harl.city.player] run function harl:city/enter
+}
+
+fn enter() {
+  tag @s remove harl.modern.player
+  tag @s add harl.city.player
+
+  loop()
+}
+
+fn exit() {
+  execute in the_end run forceload add 0 0
+  execute at @s run function harl:city/replace_inventory/init
+  execute in the_end positioned 1 0 0 positioned over motion_blocking run tp @s ~ ~ ~
+  execute in the_end run forceload remove 0 0
+}
+
+module replace_inventory {
+  fn init() {
+    summon armor_stand ~ ~ ~ {Marker:1b,Invisible:1b,Tags:["harl.inventory"]}
+    iterate()
+    kill @n[type=armor_stand,tag=harl.inventory]
+  }
+
+  fn iterate() {
+    execute unless data storage harl:player inventory[] run return -1
+    data modify entity @n[type=armor_stand,tag=harl.inventory] HandItems[0] set from storage harl:player inventory[0]
+    function harl:city/replace_inventory/macro with storage harl:player inventory[0]
+    data remove storage harl:player inventory[0]
+
+    iterate()
+  }
+
+  fn macro() {
+    /$item replace entity @s container.$(Slot) from entity @n[type=armor_stand,tag=harl.inventory] weapon.mainhand
+  }
 }
 
 fn place_template() {

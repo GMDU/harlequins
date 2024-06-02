@@ -45,7 +45,6 @@ fn remove_island2() {
 }
 
 fn exit() {
-  tag @s remove harl.modern.player
   schedule clear harl:modern/decay/iterate
   kill @e[type=block_display,tag=harl.modern.decay]
 
