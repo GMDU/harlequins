@@ -1,8 +1,12 @@
 fn init() {
+  execute if entity @s[tag=harl.credits.seen] run return -1
   kill @e[tag=harl.credits.entity]
   kill @e[tag=harl.credits.position]
-  advancement revoke @s only harl:credits/init
-  advancement revoke @s only harl:credits/init2
+  tag @s add harl.credits.seen
+
+  data modify storage harl:player inventory set from entity @s Inventory
+  clear @s
+
   tag @s add harl.credits.player
   tp ~ ~10 ~
   gamemode spectator @s
