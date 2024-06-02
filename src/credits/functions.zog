@@ -1,38 +1,41 @@
 fn init() {
   kill @e[tag=harl.credits.entity]
+  kill @e[tag=harl.credits.position]
   advancement revoke @s only harl:credits/init
   advancement revoke @s only harl:credits/init2
   tag @s add harl.credits.player
   tp ~ ~10 ~
   gamemode spectator @s
-  execute in harl:void run function harl:credits/position_player
+  execute in harl:void run tp @s 23 42 23 0 -90
+  execute in harl:void run summon minecraft:armor_stand 23 42 23 {Tags:["harl.credits.position"],Marker:1b,Invisible:1b,Rotation:[0f,-90f]}
   stopsound @s * minecraft:block.portal.travel
   stopsound @s master
 
   scoreboard players reset $time harl.credits
 
-  spawn_entities()
+  execute in harl:void run function harl:credits/spawn_entities
   loop()
 
   execute at @s run playsound minecraft:music.credits master @s ~ ~ ~ 1 1
 }
 
 fn spawn_entities() {
-  summon item_display 10 21.5 22 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114000}},brightness:{sky:15,block:15}}
-  summon item_display 10 21.5 23 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114001}},brightness:{sky:15,block:15}}
-  summon item_display 10 21.5 24 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114002}},brightness:{sky:15,block:15}}
-  summon item_display 10 21.5 25 {teleport_duration:59,Rotation:[90F,0F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114003}},brightness:{sky:15,block:15}}
+  summon item_display 25 46 29 {teleport_duration:59,Rotation:[0F,-90F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114000}},brightness:{sky:15,block:15}}
+  summon item_display 24 46 29 {teleport_duration:59,Rotation:[0F,-90F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114001}},brightness:{sky:15,block:15}}
+  summon item_display 23 46 29 {teleport_duration:59,Rotation:[0F,-90F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114002}},brightness:{sky:15,block:15}}
+  summon item_display 22 46 29 {teleport_duration:59,Rotation:[0F,-90F],Tags:["harl.credits.entity"],item:{id:"minecraft:iron_nugget",count:1,components:{"minecraft:custom_model_data":114003}},brightness:{sky:15,block:15}}
 
-  summon text_display 10 16 23 {teleport_duration:59,alignment:"left",Rotation:[90F,0F],Tags:["harl.credits.entity"],text:'[{"text":"I see the player you mean.\\n\\n","color":"dark_aqua"},[{"selector":"@a[tag=harl.credits.player]","color":"dark_green"},{"text":"?\\n\\n"}],{"text":"Yes. Take care. It has reached a higher level now. It can read our thoughts.\\n\\n","color":"dark_aqua"},{"text":"That doesn\'t matter. It thinks we are part of the game.\\n\\n","color":"dark_green"},{"text":"I like this player. It played well. It did not give up.\\n\\n","color":"dark_aqua"},{"text":"It is reading our thoughts as though they were words on a screen.","color":"dark_green"}]',background:0}
+  summon text_display 23 46.5 41 {teleport_duration:59,alignment:"left",Rotation:[180F,90F],Tags:["harl.credits.entity"],text:'[{"text":"I see the player you mean.\\n\\n","color":"dark_aqua"},[{"selector":"@a[tag=harl.credits.player]","color":"dark_green"},{"text":"?\\n\\n"}],{"text":"Yes. Take care. It has reached a higher level now. It can read our thoughts.\\n\\n","color":"dark_aqua"},{"text":"That doesn\'t matter. It thinks we are part of the game.\\n\\n","color":"dark_green"},{"text":"I like this player. It played well. It did not give up.\\n\\n","color":"dark_aqua"},{"text":"It is reading our thoughts as though they were words on a screen.\\n\\n","color":"dark_green"},{"text":"That is how it chooses to imagine many things, when it is deep in the dream of a game.\\n\\n","color":"dark_aqua"},{"text":"Words make a wonderful interface. Very flexible. And less terrifying than staring at the reality behind the screen.\\n\\n","color":"dark_green"},{"text":"They used to hear voices. Before players could read. Back in the days when those who did not play called the players witches, and warlocks. And players dreamed they flew through the air, on sticks powered by demons.\\n\\n","color":"dark_aqua"},{"text":"What did this player dream?\\n\\n","color":"dark_green"},{"text":"This player dreamed of sunlight and trees. Of fire and water. It dreamed it created. And it dreamed it destroyed. It dreamed it hunted, and was hunted. It dreamed of shelter.\\n\\n","color":"dark_aqua"}, {"text":"Hah, the original interface. A million years old, and it still works.","color":"dark_green"}]',background:0}
 }
 
 fn loop() {
   execute unless score $time harl.credits matches 30.. run schedule function harl:credits/loop 59t
   scoreboard players add $time harl.credits 1
-  execute as @e[tag=harl.credits.entity] at @s run tp ~ ~0.5 ~
+  execute as @e[tag=harl.credits.entity] at @s run tp ~ ~ ~-0.5
 }
 
 fn position_player() {
   advancement revoke @s only harl:credits/position_player
-  tp @s 5 25 24 -90 0
+  effect give @s night_vision 1 255 true
+  spectate @n[type=armor_stand,tag=harl.credits.position] @s
 }

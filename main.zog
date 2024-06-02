@@ -55,4 +55,5 @@ fn setup_credits() {
   forceload add 0 0 47 47
   place template harl:credits/credits_room 0 0 0
   forceload remove 0 0 47 47
+  forceload add 23 23
 }
