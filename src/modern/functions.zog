@@ -7,6 +7,11 @@ fn init() {
 fn place_island() {
   forceload add -1475 -1420 -1428 -1373
   place template harl:modern/island -1475 0 -1420
+
+  gamerule commandModificationBlockLimit 1000000
+  fillbiome -1475 0 -1420 -1428 45 -1373 cherry_grove
+  gamerule commandModificationBlockLimit 32768
+
   forceload remove -1475 -1420 -1428 -1373
 }
 
