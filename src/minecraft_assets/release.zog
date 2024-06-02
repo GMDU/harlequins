@@ -1,0 +1,50 @@
+asset blockstates granite_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/granite_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/granite"
+    },
+    "type=top": {
+      "model": "minecraft:block/granite_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/release/granite"
+    },
+  }
+}
+
+asset blockstates diorite_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/diorite_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/diorite"
+    },
+    "type=top": {
+      "model": "minecraft:block/diorite_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/release/diorite"
+    },
+  }
+}
+
+asset blockstates blackstone_slab {
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/blackstone_slab"
+    },
+    "type=double,waterlogged=false": {
+      "model": "minecraft:block/blackstone"
+    },
+    "type=top": {
+      "model": "minecraft:block/blackstone_slab_top"
+    },
+    "type=double,waterlogged=true": {
+      "model": "harl:block/release/coal_ore"
+    },
+  }
+}

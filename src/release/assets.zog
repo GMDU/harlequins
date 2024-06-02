@@ -1,0 +1,22 @@
+asset textures/block '../../assets/blocks/release/*.png'
+
+asset models/block granite {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/release/granite"
+  }
+}
+
+asset models/block diorite {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/release/diorite"
+  }
+}
+
+asset models/block coal_ore {
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "harl:block/release/coal_ore"
+  }
+}
