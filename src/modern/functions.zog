@@ -15,6 +15,16 @@ fn place_island() {
   forceload remove -1475 -1420 -1428 -1373
 }
 
+fn dialog1() {
+  data modify storage harl:dialog lines set value ['{"text":"Wings?","color":"dark_green"}','{"text":"Yes, wings. To reach the sky. To travel. To dream.","color":"dark_aqua"}','{"text":"And did they fly?","color":"dark_green"}','{"text":"I think they did. Did you not see it? They reached the top and flew. They saw the wide world and dreamt of what could be.","color":"dark_aqua"}','{"text":"Did they stay there?","color":"dark_green"}','{"text":"No. They came back to earth carrying their dreams, but their head was still stuck in the clouds.","color":"dark_aqua"}']
+  schedule function harl:dialog/speak 1s
+}
+
+fn dialog2() {
+  data modify storage harl:dialog lines set value ['{"text":"Why did they come down?","color":"dark_green"}','{"text":"To find themselves. They saw the vastness of the world and thought to dig a little deeper to find themselves.","color":"dark_aqua"}','{"text":"And what did they find?","color":"dark_green"}','{"text":"That life didn\'t always make sense and that somethings were sweet - bitter-sweet, but even if everything was upside down and didn\'t make sense that there was always something special to find.","color":"dark_aqua"}']
+  schedule function harl:dialog/speak 1s
+}
+
 fn remove_island1() {
   kill @e[type=villager,tag=harl.modern.villager,distance=0..]
   kill @e[type=bee,distance=0..]
@@ -97,11 +107,13 @@ fn enter() {
   :release/exit()
   tag @s add harl.modern.player
   spawnpoint @s -1445 29 -1403
+  dialog1()
 }
 
 module decay {
   fn init() {
     advancement revoke @s only harl:modern/drink_honey
+    dialog2()
     iterate()
   }
 
