@@ -15,7 +15,7 @@ fn _tick() {
 fn enter() {
   tag @s add harl.harlequins.player
   dialog()
-  schedule function harl:city/exit 158s
+  schedule function harl:harlequins/exit 158s
 }
 
 fn exit() {
